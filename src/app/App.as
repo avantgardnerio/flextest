@@ -1,12 +1,11 @@
 package app {
-import mx.core.WindowedApplication;
-import spark.components.Label;
 import flash.events.MouseEvent;
 
+import mx.core.WindowedApplication;
 import mx.events.FlexEvent;
+import mx.events.FlexNativeMenuEvent;
 
 import spark.components.Button;
-import spark.components.Group;
 
 public class App extends WindowedApplication {
     public var myButton: Button;
@@ -18,10 +17,10 @@ public class App extends WindowedApplication {
 
     private function onCreationComplete(e:FlexEvent):void {
         this.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
-        myButton.addEventListener(MouseEvent.CLICK, onClick);
+        this.menu.addEventListener(FlexNativeMenuEvent.ITEM_CLICK, onClick);
     }
 
-    private function onClick(e:MouseEvent):void {
+    private function onClick(event:FlexNativeMenuEvent):void {
         this.myButton.label = "I've been pressed";
     }
 }

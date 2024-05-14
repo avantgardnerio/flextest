@@ -10,7 +10,6 @@
     </app:menu>
 
     <fx:Declarations>
-        <!-- The xml data provider for menu -->
         <fx:XML format="e4x" id="menuData">
             <root>
                 <menuitem label="File">
