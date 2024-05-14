@@ -9,6 +9,8 @@ import flash.net.FileReference;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
 
+import mx.collections.ArrayCollection;
+
 import mx.core.WindowedApplication;
 import mx.events.FlexEvent;
 import mx.events.FlexNativeMenuEvent;
@@ -18,6 +20,7 @@ import spark.components.Button;
 public class App extends WindowedApplication {
     public var myButton:Button;
     var fileRef = new FileReference();
+    public var linedata = new ArrayCollection();
 
     public function App() {
         super();
@@ -65,6 +68,7 @@ public class App extends WindowedApplication {
             var line:String = lines[i];
             values = line.split(",");
             trace("line split in " +values);
+            linedata.addItem({incident_id:values[0], offense_type_id:values[4], reported_date:values[8], neighborhood_id:values[16]});
         }
     }
 

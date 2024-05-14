@@ -25,4 +25,12 @@
              horizontalCenter="0" verticalCenter="0"
              text="Hello World!"/>
     <s:Button id="myButton"/>
+    <mx:DataGrid dataProvider="{linedata}">
+        <mx:columns>
+            <mx:DataGridColumn dataField="incident_id"/>
+            <mx:DataGridColumn dataField="reported_date"/>
+            <mx:DataGridColumn dataField="offense_type_id"/>
+            <mx:DataGridColumn dataField="neighborhood_id"/>
+        </mx:columns>
+    </mx:DataGrid>
 </app:App>
