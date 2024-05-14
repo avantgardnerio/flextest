@@ -54,7 +54,18 @@ public class App extends WindowedApplication {
 
     public function onComplete(evt:Event):void {
         trace("File was successfully loaded.");
-        trace(fileRef.data);
+        var content = fileRef.data.toString();
+        //var ending:String = new String(“\n\g”);
+        // Split the whole file into lines
+        var values:Array;
+        var lines:Array = content.split("\n");
+        trace ("File split into " + lines.length + " lines");
+        // Split each line into data content – start from 1 instead of 0 as this is a header line.
+        for ( var i: Number=1; i < lines.length; i++ ) {
+            var line:String = lines[i];
+            values = line.split(",");
+            trace("line split in " +values);
+        }
     }
 
     public function onCancel(evt:Event):void {
