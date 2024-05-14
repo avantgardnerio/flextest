@@ -4,23 +4,23 @@
          xmlns:mx="library://ns.adobe.com/flex/mx"
          minWidth="955" minHeight="600" xmlns:app="app.*"
 >
-<!--    <app:menu>-->
-<!--        <mx:FlexNativeMenu id="myMenu" dataProvider="{menuData}" labelField="@label" showRoot="false">-->
-<!--        </mx:FlexNativeMenu>-->
-<!--    </app:menu>-->
+    <app:menu>
+        <mx:FlexNativeMenu id="myMenu" dataProvider="{menuData}" labelField="@label" showRoot="false">
+        </mx:FlexNativeMenu>
+    </app:menu>
 
-<!--    <fx:Declarations>-->
-<!--        &lt;!&ndash; The xml data provider for menu &ndash;&gt;-->
-<!--        <fx:XML format="e4x" id="menuData">-->
-<!--            <root>-->
-<!--                <menuitem label="File">-->
-<!--                    <menuitem label="Open"/>-->
-<!--                    <menuitem label="Save"/>-->
-<!--                </menuitem>-->
-<!--                <menuitem label="Help"/>-->
-<!--            </root>-->
-<!--        </fx:XML>-->
-<!--    </fx:Declarations>-->
+    <fx:Declarations>
+        <!-- The xml data provider for menu -->
+        <fx:XML format="e4x" id="menuData">
+            <root>
+                <menuitem label="File">
+                    <menuitem label="Open"/>
+                    <menuitem label="Save"/>
+                </menuitem>
+                <menuitem label="Help"/>
+            </root>
+        </fx:XML>
+    </fx:Declarations>
     
     <s:Label fontSize="24" fontWeight="bold" textAlign="center"
              horizontalCenter="0" verticalCenter="0"
