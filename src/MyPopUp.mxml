@@ -6,9 +6,9 @@
                 title="Choose a File"
                 showCloseButton="true"
 >
-    <mx:VBox>
-        <mx:HBox>
-            <mx:Label id="lblPath" />
+    <mx:VBox width="100%" >
+        <mx:HBox width="100%" >
+            <mx:Label id="lblPath" width="100%" />
             <mx:Button id="btnUpDir" label="Up" />
         </mx:HBox>
         <mx:DataGrid id="dgFiles">
