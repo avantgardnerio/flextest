@@ -15,7 +15,7 @@ import mx.managers.PopUpManager;
 public class App extends WindowedApplication {
     public var lblOpen:Label;
     public var myGrid:DataGrid;
-    public var popUp:MyPopUp;
+    public var popUp: FileChooserDlg;
 
     var fileRef = new FileReference();
     public var linedata = new ArrayCollection();
@@ -39,25 +39,8 @@ public class App extends WindowedApplication {
     }
 
     private function openFileChooser(event:MouseEvent):void {
-//        var filter = new FileFilter("csv Files (*.csv)", "*.csv");
-//        fileRef.browse([filter]);
-        this.popUp = MyPopUp(PopUpManager.createPopUp(this, MyPopUp, true));
+        this.popUp = FileChooserDlg(PopUpManager.createPopUp(this, FileChooserDlg, true));
         PopUpManager.centerPopUp(this.popUp);
-        this.popUp.addEventListener(Event.CLOSE, closePopUpWindow);
-        this.popUp.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, closePopUpWindow);
-
-        this.popUp.lblPath.text = File.workingDirectory.nativePath;
-        var desktopNodes:Array = File.workingDirectory.getDirectoryListing();
-        var files:ArrayCollection = new ArrayCollection();
-        for each (var node: File in desktopNodes) {
-            if (node.isSymbolicLink) continue;
-            files.addItem({Name: node.name, Created: node.creationDate})
-        }
-        this.popUp.dgFiles.dataProvider = files;
-    }
-
-    private function closePopUpWindow(evt:Event):void {
-        PopUpManager.removePopUp(this.popUp);
     }
 
     public function onFileSelected(evt:Event):void {
