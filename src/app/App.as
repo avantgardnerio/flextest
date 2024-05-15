@@ -1,5 +1,6 @@
 package app {
 import flash.events.*;
+import flash.filesystem.File;
 import flash.net.FileFilter;
 import flash.net.FileReference;
 
@@ -12,10 +13,10 @@ import mx.events.FlexMouseEvent;
 import mx.managers.PopUpManager;
 
 public class App extends WindowedApplication {
-    public var lblOpen: Label;
-    public var myGrid: DataGrid;
-    public var popUp: MyPopUp;
-    
+    public var lblOpen:Label;
+    public var myGrid:DataGrid;
+    public var popUp:MyPopUp;
+
     var fileRef = new FileReference();
     public var linedata = new ArrayCollection();
 
@@ -37,13 +38,22 @@ public class App extends WindowedApplication {
         this.lblOpen.addEventListener(MouseEvent.CLICK, openFileChooser);
     }
 
-    private function openFileChooser(event: MouseEvent): void {
+    private function openFileChooser(event:MouseEvent):void {
 //        var filter = new FileFilter("csv Files (*.csv)", "*.csv");
 //        fileRef.browse([filter]);
         this.popUp = MyPopUp(PopUpManager.createPopUp(this, MyPopUp, true));
         PopUpManager.centerPopUp(this.popUp);
         this.popUp.addEventListener(Event.CLOSE, closePopUpWindow);
         this.popUp.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, closePopUpWindow);
+
+        this.popUp.lblPath.text = File.workingDirectory.nativePath;
+        var desktopNodes:Array = File.workingDirectory.getDirectoryListing();
+        var files:ArrayCollection = new ArrayCollection();
+        for each (var node: File in desktopNodes) {
+            if (node.isSymbolicLink) continue;
+            files.addItem({Name: node.name, Created: node.creationDate})
+        }
+        this.popUp.dgFiles.dataProvider = files;
     }
 
     private function closePopUpWindow(evt:Event):void {
@@ -67,13 +77,18 @@ public class App extends WindowedApplication {
         // Split the whole file into lines
         var values:Array;
         var lines:Array = content.split("\n");
-        trace ("File split into " + lines.length + " lines");
+        trace("File split into " + lines.length + " lines");
         // Split each line into data content – start from 1 instead of 0 as this is a header line.
-        for ( var i: Number=1; i < lines.length; i++ ) {
+        for (var i:Number = 1; i < lines.length; i++) {
             var line:String = lines[i];
             values = line.split(",");
-            trace("line split in " +values);
-            linedata.addItem({incident_id:values[0], offense_type_id:values[4], reported_date:values[8], neighborhood_id:values[16]});
+            trace("line split in " + values);
+            linedata.addItem({
+                incident_id: values[0],
+                offense_type_id: values[4],
+                reported_date: values[8],
+                neighborhood_id: values[16]
+            });
         }
     }
 

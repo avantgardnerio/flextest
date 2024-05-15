@@ -7,6 +7,16 @@
                 showCloseButton="true"
 >
     <mx:VBox>
-        <mx:Label text="Hello, Popup" />
+        <mx:HBox>
+            <mx:Label id="lblPath" />
+            <mx:Button id="btnUpDir" label="Up" />
+        </mx:HBox>
+        <mx:DataGrid id="dgFiles">
+            <mx:columns>
+                <mx:DataGridColumn dataField="Name"/>
+                <mx:DataGridColumn dataField="Created"/>
+                <mx:DataGridColumn dataField="Opened"/>
+            </mx:columns>
+        </mx:DataGrid>
     </mx:VBox>
 </mx:TitleWindow>
