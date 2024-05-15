@@ -3,34 +3,22 @@
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:mx="library://ns.adobe.com/flex/mx"
          minWidth="955" minHeight="600" xmlns:app="app.*"
+         paddingTop="0"
+         paddingLeft="0"
+         paddingRight="0"
 >
-    <app:menu>
-        <mx:FlexNativeMenu id="myMenu" dataProvider="{menuData}" labelField="@label" showRoot="false">
-        </mx:FlexNativeMenu>
-    </app:menu>
-
-    <fx:Declarations>
-        <fx:XML format="e4x" id="menuData">
-            <root>
-                <menuitem label="File">
-                    <menuitem label="Open"/>
-                    <menuitem label="Save"/>
-                </menuitem>
-                <menuitem label="Help"/>
-            </root>
-        </fx:XML>
-    </fx:Declarations>
-    
-    <s:Label fontSize="24" fontWeight="bold" textAlign="center"
-             horizontalCenter="0" verticalCenter="0"
-             text="Hello World!"/>
-    <s:Button id="myButton"/>
-    <mx:DataGrid dataProvider="{linedata}">
-        <mx:columns>
-            <mx:DataGridColumn dataField="incident_id"/>
-            <mx:DataGridColumn dataField="reported_date"/>
-            <mx:DataGridColumn dataField="offense_type_id"/>
-            <mx:DataGridColumn dataField="neighborhood_id"/>
-        </mx:columns>
-    </mx:DataGrid>
+    <mx:VBox width="100%" height="100%" paddingTop="2" paddingLeft="2">
+        <mx:HBox>
+            <mx:Label text="Open" id="lblOpen" />
+            <mx:Label text="Close"/>
+        </mx:HBox>
+        <mx:DataGrid dataProvider="{linedata}" width="100%" height="100%" id="myGrid">
+            <mx:columns>
+                <mx:DataGridColumn dataField="incident_id"/>
+                <mx:DataGridColumn dataField="reported_date"/>
+                <mx:DataGridColumn dataField="offense_type_id"/>
+                <mx:DataGridColumn dataField="neighborhood_id"/>
+            </mx:columns>
+        </mx:DataGrid>
+    </mx:VBox>
 </app:App>

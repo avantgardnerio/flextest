@@ -1,24 +1,18 @@
 package app {
-import flash.events.MouseEvent;
-import flash.net.FileFilter;
-import flash.net.FileReference;
-import flash.display.Sprite;
 import flash.events.*;
 import flash.net.FileFilter;
 import flash.net.FileReference;
-import flash.net.URLRequest;
-import flash.utils.ByteArray;
 
 import mx.collections.ArrayCollection;
-
+import mx.controls.DataGrid;
+import mx.controls.Label;
 import mx.core.WindowedApplication;
 import mx.events.FlexEvent;
-import mx.events.FlexNativeMenuEvent;
-
-import spark.components.Button;
 
 public class App extends WindowedApplication {
-    public var myButton:Button;
+    public var lblOpen: Label;
+    public var myGrid: DataGrid;
+    
     var fileRef = new FileReference();
     public var linedata = new ArrayCollection();
 
@@ -36,11 +30,11 @@ public class App extends WindowedApplication {
 
     private function onCreationComplete(e:FlexEvent):void {
         this.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
-        this.menu.addEventListener(FlexNativeMenuEvent.ITEM_CLICK, onClick);
+
+        this.lblOpen.addEventListener(MouseEvent.CLICK, onClick);
     }
 
-    private function onClick(event:FlexNativeMenuEvent):void {
-        this.myButton.label = "I've been pressed";
+    private function onClick(event: MouseEvent):void {
         var filter = new FileFilter("csv Files (*.csv)", "*.csv");
         fileRef.browse([filter]);
     }
