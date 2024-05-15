@@ -8,10 +8,13 @@ import mx.controls.DataGrid;
 import mx.controls.Label;
 import mx.core.WindowedApplication;
 import mx.events.FlexEvent;
+import mx.events.FlexMouseEvent;
+import mx.managers.PopUpManager;
 
 public class App extends WindowedApplication {
     public var lblOpen: Label;
     public var myGrid: DataGrid;
+    public var popUp: MyPopUp;
     
     var fileRef = new FileReference();
     public var linedata = new ArrayCollection();
@@ -31,12 +34,20 @@ public class App extends WindowedApplication {
     private function onCreationComplete(e:FlexEvent):void {
         this.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
 
-        this.lblOpen.addEventListener(MouseEvent.CLICK, onClick);
+        this.lblOpen.addEventListener(MouseEvent.CLICK, openFileChooser);
     }
 
-    private function onClick(event: MouseEvent):void {
-        var filter = new FileFilter("csv Files (*.csv)", "*.csv");
-        fileRef.browse([filter]);
+    private function openFileChooser(event: MouseEvent): void {
+//        var filter = new FileFilter("csv Files (*.csv)", "*.csv");
+//        fileRef.browse([filter]);
+        this.popUp = MyPopUp(PopUpManager.createPopUp(this, MyPopUp, true));
+        PopUpManager.centerPopUp(this.popUp);
+        this.popUp.addEventListener(Event.CLOSE, closePopUpWindow);
+        this.popUp.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, closePopUpWindow);
+    }
+
+    private function closePopUpWindow(evt:Event):void {
+        PopUpManager.removePopUp(this.popUp);
     }
 
     public function onFileSelected(evt:Event):void {
